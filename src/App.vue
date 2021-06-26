@@ -15,7 +15,7 @@
     </div>
   
   <div class="dots">
-    <div class="dot"></div>
+    <div v-for="(result , i ) in results" :key="i" class="dot" @click="change(i+1)"></div>
   </div>
   </div>
 </template>
@@ -51,6 +51,13 @@ export default {
           content:'Thired content with duration 3',
           top:10,
           left:10,
+        },
+        {
+          id:'4',
+          duration: 3,
+          content:'Fourth content with duration 3',
+          top:20,
+          left:20,
         }
       ],
     };
@@ -117,12 +124,18 @@ export default {
 </script>
 
 <style scoped>
-
+.dots{
+  padding: 10px 0px;
+  display: flex;
+  justify-content: center;
+  gap:10px;
+}
 .dot{
-  background: yellow;
+  background: red;
   height: 15px;
   width:15px;
   border-radius: 100%;
+  cursor: pointer;
 }
 .djpp {
   display: flex;
