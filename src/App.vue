@@ -21,9 +21,13 @@
                       class="pointer"
                     >
                       <div class="hotspot"></div>
-                      <div class="hotspot-text" v-html="clickText"></div>
+                      <div
+                        v-if="showHelpText"
+                        class="hotspot-text"
+                        v-html="clickText"
+                      ></div>
                     </div>
-                    <video :id="playerID" class="player">
+                    <video :id="playerID" class="player" muted>
                       <source src="video.mp4" type="video/mp4" />
                     </video>
                   </div>
@@ -57,6 +61,7 @@ export default {
       clickText: "Click the circle <br /> to continue",
       index: 0,
       showModal: false,
+      showHelpText: true,
       results: [
         {
           id: "1",
@@ -91,6 +96,9 @@ export default {
   },
   methods: {
     play() {
+      if(this.index >= 0){
+        this.showHelpText = false;
+      }
       var player = document.getElementById(this.playerID);
       this.showPointer = false;
       this.index++;
@@ -120,7 +128,7 @@ export default {
         console.log(instruction);
 
         this.content = instruction.content;
-        if(this.showModal == false){
+        if (this.showModal == false) {
           this.ready();
         }
         // if (this.results[this.index + 1]) {
@@ -159,6 +167,7 @@ export default {
     // }
 
     this.ready();
+   
     // this.index++;
 
     // Video information
@@ -176,6 +185,10 @@ export default {
 </script>
 
 <style scoped>
+
+video{
+  border-radius: 5px;
+}
 .djpp {
   display: flex;
   align-items: center;
